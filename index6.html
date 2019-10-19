@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .clock{
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: gray;
+        text-align: center;
+    }
+    .time{
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+    }
+    input{
+        background-color: yellow;
+        width: 160px;
+        height: 30px;
+        margin-bottom: 20px;
+        
+    }
+    </style>
+</head>
+<body>
+    <div class="clock">
+            <div class="time">
+                    <span id="hour">00</span>:
+                    <span id="minute">00</span>:
+                    <span id="second">00</span>
+            </div>
+            <input type="button" value="开始" id="start">
+            <input type="button" value="暂停" id="stop">
+            <input type="button" value="清空" id="reset">
+    </div>
+    
+<script>
+    window.onload=clock;
+        function $(id){
+            return document.getElementById(id);
+        }
+
+        function clock(){
+            var timer=0
+            var count=0
+            $('start').onclick=function(){
+                timer=setInterval(function(){
+                    count++;
+                    $('second').innerHTML=show(count%60);
+                    $('minute').innerHTML=show(parseInt(count/60));
+                    $('hour').innerHTML=show(parseInt(count/3600));
+                },100)
+            }
+            $('stop').onclick=function(){
+                clearInterval(timer);
+            }
+            $('reset').onclick=function(){
+                clearInterval(timer);
+                count=0;
+                $('second').innerHTML='00';
+                $('minute').innerHTML='00';
+                $('hour').innerHTML='00';
+            }
+        }
+
+        function show(data){
+            if(data>=10){
+                return data;
+            }else{
+                return '0'+data;
+            }
+        }
+    
+</script>
+</body>
+
+</html>
